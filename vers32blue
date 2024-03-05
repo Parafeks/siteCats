@@ -1,0 +1,59 @@
+class Task:
+    def __init__(self, name, description, priority):
+        self.name = name
+        self.description = description
+        self.priority = priority
+        self.completed = False
+
+    def complete(self):
+        self.completed = True
+        print(f"Task '{self.name}' completed.")
+
+    def __str__(self):
+        status = "Completed" if self.completed else "Pending"
+        return f"Task: {self.name}, Description: {self.description}, Priority: {self.priority}, Status: {status}"
+
+class TaskList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+        print(f"Task '{task.name}' added.")
+
+    def complete_task(self, task_name):
+        for task in self.tasks:
+            if task.name == task_name:
+                task.complete()
+                return
+        print(f"Task '{task_name}' not found.")
+
+    def display_tasks(self):
+        if self.tasks:
+            print("Task List:")
+            for task in self.tasks:
+                print(task)
+        else:
+            print("Task List is empty.")
+
+def main():
+    task_list = TaskList()
+
+    task1 = Task("Study", "Prepare for exam", "High")
+    task_list.add_task(task1)
+
+    task2 = Task("Exercise", "Go for a run", "Medium")
+    task_list.add_task(task2)
+
+    task3 = Task("Shopping", "Buy groceries", "Low")
+    task_list.add_task(task3)
+
+    task_list.display_tasks()
+
+    task_list.complete_task("Exercise")
+    task_list.display_tasks()
+
+    task_list.complete_task("Meeting")
+
+if __name__ == "__main__":
+    main()
